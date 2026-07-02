@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Vape & Tea House - POS System</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <!-- Shown while Supabase data is loading -->
+    <div class="app-loading" id="appLoading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- App shell, hidden until data is ready -->
+    <div id="appShell" class="hidden">
+
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>Vape & Tea</span>
+            </div>
+            <nav style="margin-top:1.2rem;" id="navMenu"></nav>
+            <div class="user-card">
+                <div class="avatar" id="userAvatar">A</div>
+                <div class="info">
+                    <div class="name" id="userName">Admin</div>
+                    <div class="role" id="userRole">Administrator</div>
+                </div>
+                <button onclick="logout()" class="btn btn-danger btn-xs" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:#94a3b8;">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar()"></div>
+
+        <main class="main-content" id="mainContent">
+            <div class="topbar">
+                <div style="display:flex;align-items:center;gap:14px;">
+                    <button class="mobile-toggle" id="mobileToggle" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title" id="pageTitle">Dashboard <small id="pageSubtitle">Overview</small></h1>
+                </div>
+                <div class="actions">
+                    <button class="btn-icon" onclick="toggleLang()" title="Toggle Language"><i class="fas fa-globe"></i></button>
+                    <button class="btn-icon" onclick="toggleCurrency()" title="Toggle Currency"><i class="fas fa-dollar-sign"></i></button>
+                    <button class="btn-icon" onclick="toggleTheme()" title="Toggle Theme" id="themeToggle"><i class="fas fa-moon"></i></button>
+                    <button class="btn btn-primary btn-sm" onclick="sendTelegramManual()">
+                        <i class="fab fa-telegram"></i> <span data-i18n="send_report">Send Report</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="pageContent" class="fade-in"></div>
+        </main>
+
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-box" id="modalBox">
+            <div class="modal-header">
+                <h3 id="modalTitle">Modal</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalBody"></div>
+            <div class="modal-footer" id="modalFooter">
+                <button class="btn btn-outline btn-sm" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary btn-sm" id="modalConfirmBtn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Core -->
+    <script src="js/config.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/router.js"></script>
+
+    <!-- Pages -->
+    <script src="js/pages/dashboard.js"></script>
+    <script src="js/pages/pos.js"></script>
+    <script src="js/pages/products.js"></script>
+    <script src="js/pages/categories.js"></script>
+    <script src="js/pages/customers.js"></script>
+    <script src="js/pages/users.js"></script>
+    <script src="js/pages/reports.js"></script>
+    <script src="js/pages/settings.js"></script>
+
+    <!-- Entry point -->
+    <script src="js/main.js"></script>
+</body>
+</html>
